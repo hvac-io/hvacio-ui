@@ -1,0 +1,31 @@
+
+{:en {:vigilia {:devices "Controllers"
+                :scantime "Scanned in:"
+                :last-scan "Last scan:"
+                :list "Devices list"
+                :name "Name"
+                :description "Description"
+                :value "Value"
+                :unit "Unit"
+                :search-name "Search name"
+                :objects-visible "Objects visible"
+                :loading-objects "Loading objects..."}
+      :briefcase {:delete-all "Delete all"
+                  :change-colors "Change colors"}}
+
+ :fr {:vigilia {:devices "Contrôleurs"
+                :scantime "Scanné en:"
+                :last-scan "Dernier scan:"
+                :list "Liste d'appareils"
+                :graphs "Graphiques"
+                :name "Nom"
+                :description "Description"
+                :value "Valeur"
+                :unit "Unité"
+                :search-name "Rechercher nom"
+                :objects-visible "Objets visibles"
+                :loading-objects "Chargement des objets..."}
+      :briefcase {
+                  :delete-all "Effacer tout"
+                  :change-colors "Changer les couleurs"}}}
+ 
