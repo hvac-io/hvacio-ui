@@ -10,8 +10,12 @@
                  [reagent "0.4.2"]
                  [org.clojars.frozenlock/query "0.2.3"]
                  [historian "1.0.1"]
-                 [org.clojars.franks42/cljs-uuid-utils "0.1.3"]
-                 [cljs-ajax "0.2.3"]]
+                 ;[org.clojars.franks42/cljs-uuid-utils "0.1.3"]
+                 [cljs-ajax "0.2.3"]
+                 
+                 ;; internationalization
+                 [com.taoensso/tower "2.1.0-RC1"]
+                 ]
 
   :profiles {:dev {:dependencies [[ring "1.2.1"]
                                   [compojure "1.1.6"]
@@ -22,16 +26,13 @@
                                   ;; test API
                                   [liberator "0.11.0"]
 
-                                  ;; internationalization
-                                  [com.taoensso/tower "2.1.0-RC1"]
-
                                   ;;cljs
                                         ; [alandipert/storage-atom "1.2.3"]
                                   ;[org.clojars.franks42/cljs-uuid-utils "0.1.3"]
                                   ]
 
                    :main hvacio-ui.server
-                   :ring {:handler query.server/app}
+                   :ring {:handler hvacio-ui.server/app}
                    :source-paths ["src/clj"]
                    :injections [(ns user)
                                 (require '[cljs.repl.browser :as brepl]
@@ -41,7 +42,7 @@
                                                 (brepl/repl-env :port 9000)))]
                    :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}}
 
-
+  :resource-paths ["resources/dict"]
 
   :plugins [[lein-cljsbuild "1.0.2"]
             [lein-ring "0.8.10"]]
@@ -55,7 +56,8 @@
                                          :optimizations :simple
                                          :pretty-print true
                                          :preamble ["reagent/react.min.js"]}
-                              :jar true}
+                              ;:jar true
+}
                        :dev {:source-paths ["src/cljs" "src-dev/cljs"]
                              :compiler {:output-to "resources/public/js/cljs.js"
                                         :optimizations :whitespace

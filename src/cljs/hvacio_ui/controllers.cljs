@@ -8,7 +8,8 @@
             [hvacio-ui.util :as util]
             [goog.string :as gstring]
             [hvacio-ui.templates.modals :as modal]
-            [query.query :as q]))
+            [query.query :as q]
+            [clojure.string :as s]))
 
 
 (defn get-url-device
@@ -191,7 +192,7 @@
          [:div.col-sm-2 {:style {:height (str "calc(100vh - " top-margin ")")
                                  :padding-right 0
                                  :overflow-y "auto"}}
-          [dev-list-item project-id d device-id-a device-summary-a]]
+          [dev-list-item project-id d device-id-a device-summary-a configs]]
          [:div.col-sm-10 {:style {:height (str "calc(100vh - " top-margin ")")
                                   :overflow-y "auto"}}
           [scroll-main-view project-id device-id-a device-summary-a configs]]]))))
