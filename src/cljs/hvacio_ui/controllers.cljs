@@ -81,13 +81,13 @@
          )))
 
 (defn input [visible-objects-a objects]
-  [:input {:type "text" :class "form-control" :placeholder (t/t @t/locale :vigilia/search-name)
+  [:input {:type "text" :class "form-control" :placeholder (t/t @t/locale :controllers/search-name)
            :on-change #(reset! visible-objects-a (find-name (-> % .-target .-value) objects))}])
 
 (defn objects-count [visible-objects-a objects]
   (let [vis @visible-objects-a]
     [:div.text-center
-     (str (count vis) " / " (count objects)" "(t/t @t/locale :vigilia/objects-visible))]))
+     (str (count vis) " / " (count objects)" "(t/t @t/locale :controllers/objects-visible))]))
 
 
 (def input-with-focus ;;; check later why the minified version screw up this...
@@ -110,27 +110,24 @@
   (let [objs (sort-by :name @visible-objects-a)]
     [:table.table.table-striped {:id "device-table"}
      [:thead [:tr 
-              [:th (t/t @t/locale :vigilia/name)]
-              [:th (t/t @t/locale :vigilia/description)] 
-              [:th (t/t @t/locale :vigilia/value)] 
-              [:th (t/t @t/locale :vigilia/unit)] [:th]]]
+              [:th (t/t @t/locale :controllers/name)]
+              [:th (t/t @t/locale :controllers/description)] 
+              [:th (t/t @t/locale :controllers/value)] 
+              [:th (t/t @t/locale :controllers/unit)] [:th]]]
      [:tbody
       (for [obj objs :when (:name obj)]
-        ^{:key obj}
+        ^{:key (:object-id obj)}
         [:tr
-         [:td (:name obj)]
+         [:td (let [n (:name obj)] (if-not (empty? n) n (t/t @t/locale :controllers/no-name)))]
          [:td (:description obj)]
-         [:td (when-let [v (:value obj)] (gstring/format "%.2f" v))]
+         [:td (when-let [v (:value obj)] 
+                (if (number? v) 
+                  (gstring/format "%.2f" v)
+                  (name v)))]
          [:td (:unit obj)]
          [:td 
-          (when (:value obj)
-            (let [obj* (assoc obj :project-id p-id :device-id d-id)]
-              [:div {:style {:white-space "nowrap"}}
-               (for [{:keys [btn-symbol btn-fn btn-title]} (:device-table-btns configs)]
-                 ^{:key (str btn-title (:object-id obj*))}
-                 [:button.btn.btn-default.btn-sm
-                  {:on-click #(btn-fn obj*)}
-                  btn-symbol])]))]])]]))
+          (let [obj* (assoc obj :project-id p-id :device-id d-id)]
+            ((:device-table-btns configs) obj*))]])]]))
 
 
 (defn device-table []
@@ -157,7 +154,7 @@
                  ;[last-scan-duration data]
                  ])
      [:a.btn.btn-default.visible-xs {:href "#device-list"} 
-      (t/t @t/locale :vigilia/list) " "[:i.fa.fa-list]]
+      (t/t @t/locale :controllers/list) " "[:i.fa.fa-list]]
      
      (when data 
        (let [objects-a (r/atom nil)]
@@ -202,21 +199,14 @@
 (def default-configs
   {:top-margin "50px" ; space for the navbar, or for tabs.
    :api-root "/api/v1/"
-   :device-table-btns
-   [{:btn-fn #(modal/modal [:div [:h3 "Undefined"] "Undefined function for this button."])
-     :btn-symbol [:i.fa.fa-bar-chart-o]
-     :btn-title "Timeseries"}
-    {:btn-fn #(modal/modal [:div [:h3 "Undefined"] "Undefined function for this button."])
-     :btn-symbol [:i.fa.fa-briefcase]
-     :btn-title "Briefcase"}]
-   })
-
-
-;; (modal/modal 
-;;      [:div
-;;       [:iframe 
-;;        {:style {:height "500px" :width "100%" :border "none"}
-;;         :src "https://hvac.io/vigilia/embed/g/5371147be4b0222b740851a2?bc%5B%5D=%3Aa10122..0.7"}]])
+   :device-table-btns ; each object (row) is applied to this function
+   (fn [obj]
+     (when (:value obj)
+       [:div {:style {:white-space "nowrap"}}
+        [:button.btn.btn-default.btn-sm
+         {:on-click #(modal/modal
+                      [:div [:h3 "Undefined"] "Undefined function for this button."])}
+         [:i.fa.fa-briefcase]]]))})
 
 (defn controllers-view 
   ([project-id] (controllers-view project-id nil))

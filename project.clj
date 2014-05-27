@@ -34,15 +34,16 @@
                    :main hvacio-ui.server
                    :ring {:handler hvacio-ui.server/app}
                    :source-paths ["src/clj"]
-                   :injections [(ns user)
-                                (require '[cljs.repl.browser :as brepl]
-                                         '[cemerick.piggieback :as pb])
-                                (defn browser-repl []
-                                  (pb/cljs-repl :repl-env
-                                                (brepl/repl-env :port 9000)))]
-                   :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}}
+                   ;; :injections [(ns user)
+                   ;;              (require '[cljs.repl.browser :as brepl]
+                   ;;                       '[cemerick.piggieback :as pb])
+                   ;;              (defn browser-repl []
+                   ;;                (pb/cljs-repl :repl-env
+                   ;;                              (brepl/repl-env :port 9000)))]
+                   ;; :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+             }}
 
-  :resource-paths ["resources/dict"]
+;  :resource-paths ["resources/dict"]
 
   :plugins [[lein-cljsbuild "1.0.2"]
             [lein-ring "0.8.10"]]

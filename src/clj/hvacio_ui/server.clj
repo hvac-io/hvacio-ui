@@ -16,10 +16,10 @@
                            )
             (h/include-js "https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"
                           "//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
-                          )]
+                          "js/cljs.js")]
            [:body ;{:style "background-color:grey;"}
             [:div#my-div "test div"]
-            [:script {:src "js/cljs.js"}]
+            ;[:script {:src "js/cljs.js"}]
             [:script "hvacio_ui.client.run('fake-project-id', 'en')"]
             ]))
 
@@ -33,4 +33,3 @@
 
 (defn -main [& args]
   (jetty/run-jetty app {:port 3000}))
-
