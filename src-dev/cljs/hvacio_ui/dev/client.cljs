@@ -22,6 +22,7 @@
 (defn ^:export run [project-id locale]
   (r/render-component
    [:div.container
+    [modal/modal-window]
     [:div {:style {:height "50px" :background-color "red"}}]
     [ctrls/controllers-view "5371147be4b0222b740851a2"
      ;test-configs

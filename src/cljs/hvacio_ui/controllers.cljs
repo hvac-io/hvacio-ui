@@ -185,9 +185,16 @@
           (GET (api-path (:api-root configs) "devices-list" project-id)
               {:handler #(reset! dev-list-a %)
                :error-handler prn}))
+        (prn d)
         (if (empty? d)
           ;; if we don't find any devices
-          [:div [:h3 (t/t @t/locale :controllers/list)]]
+          [:div.row
+           [:div.col-sm-2.text-center
+            [:h4 (t/t @t/locale :controllers/nothing-found)
+             [:button.btn.btn-default
+              {:on-click #(js/location.reload)
+               :title (t/t @t/locale :controllers/refresh)}
+              [:i.fa.fa-refresh]]]]]
           
           ;; when devices are found
           [:div.row
@@ -217,6 +224,6 @@
   ([project-id] (controllers-view project-id nil))
   ([project-id configs]
      [:div
-      [modal/modal-window]
+      ;[modal/modal-window]
       [devices project-id (merge default-configs configs)]]))
 
