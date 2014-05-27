@@ -185,7 +185,6 @@
           (GET (api-path (:api-root configs) "devices-list" project-id)
               {:handler #(reset! dev-list-a %)
                :error-handler prn}))
-        (prn d)
         (if (empty? d)
           ;; if we don't find any devices
           [:div.row
