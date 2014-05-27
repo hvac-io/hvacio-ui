@@ -185,14 +185,19 @@
           (GET (api-path (:api-root configs) "devices-list" project-id)
               {:handler #(reset! dev-list-a %)
                :error-handler prn}))
-        [:div.row
-         [:div.col-sm-2 {:style {:height (str "calc(100vh - " top-margin ")")
-                                 :padding-right 0
-                                 :overflow-y "auto"}}
-          [dev-list-item project-id d device-id-a device-summary-a configs]]
-         [:div.col-sm-10 {:style {:height (str "calc(100vh - " top-margin ")")
-                                  :overflow-y "auto"}}
-          [scroll-main-view project-id device-id-a device-summary-a configs]]]))))
+        (if (empty? d)
+          ;; if we don't find any devices
+          [:div [:h3 (t/t @t/locale :controllers/list)]]
+          
+          ;; when devices are found
+          [:div.row
+           [:div.col-sm-2 {:style {:height (str "calc(100vh - " top-margin ")")
+                                   :padding-right 0
+                                   :overflow-y "auto"}}
+            [dev-list-item project-id d device-id-a device-summary-a configs]]
+           [:div.col-sm-10 {:style {:height (str "calc(100vh - " top-margin ")")
+                                    :overflow-y "auto"}}
+            [scroll-main-view project-id device-id-a device-summary-a configs]]])))))
 
   
 
