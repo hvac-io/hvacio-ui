@@ -149,7 +149,8 @@
         device-id @d-id-a]
     [:div
      (when data [:div.jumbotron
-                 [:h3 {:style {:margin-top 0 :padding-top 20}}(:name data)]
+                 [:h3 {:style {:margin-top 0 :padding-top 20}}
+                  (:name data) [:small (str " (" device-id ")")]]
                  ;[last-scan data]". --"
                  ;[last-scan-duration data]
                  ])

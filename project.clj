@@ -1,4 +1,4 @@
-(defproject hvacio/hvacio-ui "0.1.1"
+(defproject hvacio/hvacio-ui "0.1.2"
   :description "A common UI for multiple HVAC.IO applications."
   :url "https://hvac.io"
   :license {:name "GNU General Public License V3"
@@ -20,14 +20,14 @@
                                   ;; test API
                                   [liberator "0.11.0"]
 
-                                  [org.clojure/clojurescript "0.0-2234" :scope "provided"]]
+                                  [org.clojure/clojurescript "0.0-2173" :scope "provided"]]
 
                    :main hvacio-ui.server
                    :ring {:handler hvacio-ui.server/app}
                    :source-paths ["src/clj"]
                    }}
 
-  :plugins [[lein-cljsbuild "1.0.3"]
+  :plugins [[lein-cljsbuild "1.0.2"]
             [lein-ring "0.8.10"]]
   :hooks [leiningen.cljsbuild]
   :source-paths ["src/cljs"] ;; don't include the ring/server code
@@ -41,7 +41,8 @@
                                          :preamble ["reagent/react.min.js"]}
                               ;:jar true ;---> no need for it, source-paths already configured
 }
-                       :dev {:source-paths ["src/cljs" "src-dev/cljs"]
+                       :dev {:source-paths ["src/cljs" 
+                                            "src-dev/cljs"]
                              :compiler {:output-to "resources/public/js/cljs.js"
                                         :optimizations :whitespace
                                         :pretty-print true
