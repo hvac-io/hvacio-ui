@@ -33,6 +33,7 @@
 ;;; the device name. The user can then click on a device to see its
 ;;; objects in details.
 
+
 (defn dev-list-item []
   (fn [project-id dev-list current main configs]
     (let [cur @current
@@ -45,27 +46,30 @@
                              :error-handler prn})))]
 
       ;; initialization
-      (cond 
-       ;; If we don't have a selected device, but there's one in the query
-       (and dev-list (not cur) (get-url-device)) (update-fn (get-url-device))
-       ;; If we don't have a selected device, select one for us.
-       (and dev-list (not cur)) (let [id (ffirst (sort-by #(reader/read-string (first %)) dev-list))]
-                                  (update-fn id)))
-      
-      ;; Rendering section
-      [:div.btn-group-vertical.btn-group.btn-block 
-       {:id "device-list"}
-       (for [[id name] (sort-by #(reader/read-string (first %)) dev-list)]
-         ^{:key id}
-         [:button.btn.btn-default
-          {:style {:cursor "pointer"
-                    :white-space "normal"}
-           :class (when (= id cur) "active")
-           :on-click #(update-fn id)
-           :title name}
-          [:div.text-left
-           [:div id]
-           [:strong name]]])])))
+      (when-let [select-id
+                 (or
+                  ;; If we don't have a selected device, but there's one in the query
+                  (when (and dev-list (not cur) (get-url-device)) (get-url-device))
+                  ;; If we don't have a selected device, select one for us.
+                  (when (and dev-list (not cur)) 
+                    (ffirst (sort-by #(reader/read-string (first %)) dev-list))))]
+        (update-fn select-id))
+
+      (let [cur2 @current] ;; we need a second one after we've reset it.
+        ;; Rendering section
+        [:div.btn-group-vertical.btn-group.btn-block 
+         {:id "device-list"}
+         (for [[id name] (sort-by #(reader/read-string (first %)) dev-list)]
+           ^{:key id}
+           [:button.btn.btn-default
+            {:style {:cursor "pointer"
+                     :white-space "normal"}
+             :class (when (= id cur2) "active")
+             :on-click #(update-fn id)
+             :title name}
+            [:div.text-left
+             [:div id]
+             [:strong name]]])]))))
 
 
 ;=======================================================
