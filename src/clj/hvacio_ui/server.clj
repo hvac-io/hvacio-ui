@@ -14,7 +14,7 @@
                            "//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
                            ;"/css/hvacio.css"
                            )
-            (h/include-js "https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"
+            (h/include-js "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"
                           "//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
                           "js/cljs.js")]
            [:body ;{:style "background-color:grey;"}

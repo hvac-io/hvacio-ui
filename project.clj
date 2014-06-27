@@ -1,10 +1,9 @@
-(defproject hvacio/hvacio-ui "0.1.0"
+(defproject hvacio/hvacio-ui "0.1.1"
   :description "A common UI for multiple HVAC.IO applications."
   :url "https://hvac.io"
   :license {:name "GNU General Public License V3"
             :url "http://www.gnu.org/licenses/gpl-3.0.html"}
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-2173" :scope "provided"]
 
                  ;; cljs
                  [reagent "0.4.2"]
@@ -19,14 +18,16 @@
                                   [compojure "1.1.6"]
                                   
                                   ;; test API
-                                  [liberator "0.11.0"]]
+                                  [liberator "0.11.0"]
+
+                                  [org.clojure/clojurescript "0.0-2234" :scope "provided"]]
 
                    :main hvacio-ui.server
                    :ring {:handler hvacio-ui.server/app}
                    :source-paths ["src/clj"]
                    }}
 
-  :plugins [[lein-cljsbuild "1.0.2"]
+  :plugins [[lein-cljsbuild "1.0.3"]
             [lein-ring "0.8.10"]]
   :hooks [leiningen.cljsbuild]
   :source-paths ["src/cljs"] ;; don't include the ring/server code
