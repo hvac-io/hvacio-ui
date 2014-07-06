@@ -5,6 +5,7 @@
             [cljs.reader :as reader]
             [ajax.core :refer [GET POST]]
             [hvacio-ui.translation :as t]
+            [hvacio-ui.templates.nprogress :as nprogress]
             [hvacio-ui.util :as util]
             [goog.string :as gstring]
             [hvacio-ui.templates.modals :as modal]
@@ -40,10 +41,12 @@
           update-fn (fn [id]
                        (do (reset! current id)
                            (set-url-device! id)
+                           (nprogress/start)
                            (GET
                             (api-path (:api-root configs) "device-summary" project-id id)
-                            {:handler #(reset! main %)
-                             :error-handler prn})))]
+                               {:handler #(do (nprogress/done)
+                                              (reset! main %))
+                                :error-handler prn})))]
 
       ;; initialization
       (when-let [select-id
@@ -144,8 +147,7 @@
               :error-handler prn}))
       [:div
        [search-bar visible-objects-a objects]
-       [make-table visible-objects-a objects-a project-id device-id configs]
-       ])))
+       [make-table visible-objects-a objects-a project-id device-id configs]])))
 
 
 (defn dev-main-view [p-id d-id-a device-summary-a configs]
