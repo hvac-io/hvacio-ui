@@ -6,5 +6,5 @@
   "Add hvacio-ui resources to the handler."
   [handler]
   (routes
-   (route/resources "/hvacio-ui" {:root "hvacio-ui/public"})
+   (route/resources "/hvacio-ui" {:root "hvacio-ui-resources/public"})
    handler))
