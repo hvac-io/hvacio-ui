@@ -1,4 +1,4 @@
-(defproject hvacio/hvacio-ui "0.1.8"
+(defproject hvacio/hvacio-ui "0.1.9"
   :description "A common UI for multiple HVAC.IO applications."
   :url "https://hvac.io"
   :license {:name "GNU General Public License V3"

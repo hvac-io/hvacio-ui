@@ -146,7 +146,7 @@
             (GET (api-path (:api-root configs) "objects" project-id device-id)
                 {:handler #(do (nprogress/done)
                                (reset! objects-a %))
-                 :error-handler prn}))
+                 :error-handler prn})))
       [:div
        [search-bar visible-objects-a objects]
        [make-table visible-objects-a objects-a project-id device-id configs]])))
