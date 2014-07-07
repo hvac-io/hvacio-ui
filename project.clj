@@ -1,4 +1,4 @@
-(defproject hvacio/hvacio-ui "0.1.5"
+(defproject hvacio/hvacio-ui "0.1.7"
   :description "A common UI for multiple HVAC.IO applications."
   :url "https://hvac.io"
   :license {:name "GNU General Public License V3"
@@ -32,7 +32,8 @@
 
   :plugins [[lein-cljsbuild "1.0.3"]
             [lein-ring "0.8.10"]]
-  :hooks [leiningen.cljsbuild]
+
+  :source-paths ["src/clj" "src/cljs"]
   :cljsbuild { 
               :builds {
                        :main {
@@ -52,7 +53,7 @@
                        :test {:source-paths ["src/cljs" "test/cljs"]
                               :compiler {:output-to "resources/public/js/cljs.js"
                                          :optimizations :whitespace
-                                         :pretty-print true
+                                         :pretty-print truez
                                          :preamble ["reagent/react.js"]}}
                        }}
   :aliases {"browser-test" ["do" ["cljsbuild" "clean"] ["cljsbuild" "once" "test"] ["ring" "server" "3001"]]

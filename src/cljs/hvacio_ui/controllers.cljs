@@ -189,9 +189,11 @@
       (let [d @dev-list-a
             top-margin (:top-margin configs)]
         (when (nil? d)
-          (GET (api-path (:api-root configs) "devices-list" project-id)
-              {:handler #(reset! dev-list-a %)
-               :error-handler prn}))
+          (do (nprogress/start)
+              (GET (api-path (:api-root configs) "devices-list" project-id)
+                  {:handler #(do (nprogress/done)
+                                 (reset! dev-list-a %))
+                   :error-handler prn})))
         (if (empty? d)
           ;; if we don't find any devices
           [:div.row
