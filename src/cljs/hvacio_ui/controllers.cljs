@@ -1,14 +1,13 @@
 (ns hvacio-ui.controllers
   (:require [reagent.core :as r]
             [goog.dom :as dom]
-            [hvacio-ui.templates.resize :as rz]
             [cljs.reader :as reader]
             [ajax.core :refer [GET POST]]
             [hvacio-ui.translation :as t]
             [hvacio-ui.templates.nprogress :as nprogress]
             [hvacio-ui.util :as util]
             [goog.string :as gstring]
-            [hvacio-ui.templates.modals :as modal]
+            [reagent-modals.modals :as modal]
             [query.query :as q]
             [clojure.string :as s]))
 
@@ -226,7 +225,7 @@
      (when (:value obj)
        [:div {:style {:white-space "nowrap"}}
         [:button.btn.btn-default.btn-sm
-         {:on-click #(modal/modal
+         {:on-click #(modal/modal!
                       [:div [:h3 "Undefined"] "Undefined function for this button."])}
          [:i.fa.fa-briefcase]]]))})
 

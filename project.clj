@@ -1,4 +1,4 @@
-(defproject hvacio/hvacio-ui "0.1.10"
+(defproject hvacio/hvacio-ui "0.1.11"
   :description "A common UI for multiple HVAC.IO applications."
   :url "https://hvac.io"
   :license {:name "GNU General Public License V3"
@@ -6,18 +6,19 @@
   :dependencies [[org.clojure/clojure "1.6.0"]
 
 
-                 [compojure "1.1.8"]
+                 [compojure "1.2.1"]
 
                  ;; cljs
-                 [reagent "0.4.2"]
+                 [reagent "0.4.3"]
                  [org.clojars.frozenlock/query "0.2.3"]
-                 [historian "1.0.1"]
-                 [cljs-ajax "0.2.3"]
+                 [org.clojars.frozenlock/reagent-modals "0.2.0"]
+                 [historian "1.0.7"]
+                 [cljs-ajax "0.3.3"]
                  
                  ;; internationalization
-                 [com.taoensso/tower "2.1.0-RC1"]
+                 [com.taoensso/tower "3.0.2"]
                  
-                 [org.clojure/clojurescript "0.0-2268" :scope "provided"]]
+                 [org.clojure/clojurescript "0.0-2371" :scope "provided"]]
 
   :profiles {:dev {:dependencies [[ring "1.2.1"]
                                   [compojure "1.1.6"]
@@ -31,7 +32,7 @@
                    }}
 
   :plugins [[lein-cljsbuild "1.0.3"]
-            [lein-ring "0.8.10"]]
+            [lein-ring "0.8.13"]]
 
   :source-paths ["src/clj" "src/cljs"]
   :cljsbuild { 
