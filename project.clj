@@ -1,4 +1,4 @@
-(defproject hvacio/hvacio-ui "0.1.11"
+(defproject hvacio/hvacio-ui "0.1.12"
   :description "A common UI for multiple HVAC.IO applications."
   :url "https://hvac.io"
   :license {:name "GNU General Public License V3"
@@ -13,7 +13,7 @@
                  [org.clojars.frozenlock/query "0.2.3"]
                  [org.clojars.frozenlock/reagent-modals "0.2.0"]
                  [historian "1.0.7"]
-                 [cljs-ajax "0.3.3"]
+                 [cljs-ajax "0.2.3"]
                  
                  ;; internationalization
                  [com.taoensso/tower "3.0.2"]
