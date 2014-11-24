@@ -1,6 +1,6 @@
 (ns hvacio-ui.translation
-  ;(:require-macros [taoensso.tower.cljs-macros :as tower-macros :refer (with-tscope)])
-  (:require [taoensso.tower :as tower :include-macros true]))
+  (:require-macros [taoensso.tower :as tower :refer (dict-compile)])
+  (:require [taoensso.tower :as tower]))
 
 (def locale (atom "en"))
 
